@@ -1,3 +1,7 @@
+//See chaosList.js for a more indepth description of what this file is about.
+
+//TODO: review the list for Oracle wording changes.
+
 let encantWorldLandList = [
     "1 - Masquerade Cycle - Non-land permanent abilities with activation costs may be played by any player.",
     "2 - Mirari Concentrate - All creatures gain +1/+1. All lands produce an additional mana of the appropriate type when tapped for mana. Whenever a player plays an instant or sorcery spell, that player may pay (4). If they do, they put a copy of that spell onto the stack. They may choose new targets for the copy.",

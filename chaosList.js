@@ -1,10 +1,53 @@
-let myArray = 
-    ['bob',
-        'Joe',
-        'Bob3',
-        'Joel'
-    ];
+// This is a single line comment in javascript
+/*
+    This is a multiline comment in javascript note the start and end tags are on a line by themselves.
+*/
 
+/*
+    This creates an array of strings. Arrays are basically zero indexed lists of things. Each array item can be refered 
+    to indivudally by using a notation such as:
+    chaosList[0] 
+    for the first item or
+    chaosList[3] for the 4th item
+
+    If you have an integer in a variable you can also reference it like:
+    chaosList[x]
+    for the x th entry.
+
+    You can find out the size or length of the array by using the length attribute such as:
+    let size = chaosList.length; 
+
+    Adding this together you can get the last entry by doing:
+    let size = chaosList.length;
+    let lastEntry = chaosList[size-1]; //subtract 1 to account for the array being zero index based
+
+    or it can be reduced a bit by doing:
+    let lastEntry = chaosList[chaosList.length-1];
+
+    When initializing arrays like we are here we use [ & ] to denote the beginning and end of the list.
+    Inside the bracket's we use a comma seperated list of values, in this case it's all strings.
+
+    Strings are dentoed with either double or single quotes around the string content.
+    If a string contains a double quote try to use a single quote around the content.
+    If a string contains a single quote try to use a double quote around the content.
+    If a string contains both then you can escape the inner quote character by preceding it with a \
+    for example:
+    let complexString = 'This can\'t be done with out escaping the \' but you can use the " character';
+
+    There are a few other characters that need to be escaped as well the \ being the one you're most likely
+    to run into. So if you want \ in a string you would need to use \\ instead. You can string these together 
+    in a row if you're using them a lot so something like Wear \\ Tear would look like this in a string:
+    let cardName = "Wear \\\\ Tear";
+    
+    
+    Each entry is a different "roll" on the list.
+    Editing this string changes what is displayed when that line is rolled.
+    The copy/paste included the roll number folllowed by a -.
+    I don't think we need to keep the roll number if you want to take that out that's fine.
+    If we need to know what number was rolled I can calculate that and display it when it's rolled.
+*/
+
+//TODO: review the list for Oracle wording changes.
 let chaosList = 
 [
     "1 - Eureka - Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.",

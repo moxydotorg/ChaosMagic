@@ -1,3 +1,6 @@
+//See chaosList.js for a more indepth description of what this file is about.
+
+//TODO: review the list for Oracle wording changes.
 let personaLandList = [
     "1 - Josh - Roll a D6. For each opponent, lose that much life. Each opponent gains that much life. Until you have taken that many turns: you and permanents you control have hexproof, and cannot be attacked, and creatures you control are unblockable.",
     "2 - Jake - Put a 5/5 blue Squid token into play under your control. Until your next turn, whenever a roll is made on Personaland, put an additional 5/5 blue Squid token into play under your control.",

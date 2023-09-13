@@ -1,3 +1,6 @@
+//See chaosList.js for a more indepth description of what this file is about.
+
+//TODO: review the list for Oracle wording changes.
 let whackyLandList = [
     "2 - Time Sprint - Take 2 turns after this one.",
     "3 - Musical Chairs - All players get up and move one seat in the direction the turns are proceeding.",
