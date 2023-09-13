@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <style>
+            .title_box {
+                border: #3c5a86 1px dotted;
+                }
+
+            .title_box #title {
+                position: relative;
+                top: -0.5em;
+                margin-left: 1em;
+                display: inline;
+                background-color: white;
+            }
+
+            .title_box #content {}
+
+            .butt{
+                height:100px;
+                width: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Chaos</h1>
+
+        <div class="title_box">
+            <div id="title">Controls</div>
+            <div id="buttons">
+                <p>
+                    <button id="bChaos" class="butt">Chaos</button>
+                    <button id="bEnchant" class="butt">EnchantWorldLand</button>
+                    <button id="bPersona" class="butt">PersonaLand</button>
+                    <button id="bWhacky" class="butt">WhackyLand</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="bClear" class="butt">Clear</button>
+                </p>
+            </div>    
+        </div>
+        <p></p>
+        <div class="title_box">
+            <div id="title">Current Chaos Card</div>
+            <div id="Divchaos"><p id="chaos"></p></div>
+        </div>
+        <p></p>
+        <div class="title_box">
+            <div id="title">Current EnchantWorldLand Card</div>
+            <div id="Divenchantworldland"><p id="enchantworldland"></p></div>
+        </div>
+        <p></p>
+        <div class="title_box">
+            <div id="title">Current PersonaLand Card</div>
+            <div id="Divpersonaland"><p id="personaland"></p></div>
+        </div>
+        <p></p>
+        <div class="title_box">
+            <div id="title">Current WhackyLand Card</div>
+            <div id="Divwhackyland"><p id="whackyland"></p></div>
+        </div>
+
+        <script src="./chaosList.js"></script>
+        <script src="./enchantWorldLandList.js"></script>
+        <script src="./personaLandList.js"></script>
+        <script src="whackyLandList.js"></script>
+        <script src="./main.js"></script>
+    </body>
+</html>
