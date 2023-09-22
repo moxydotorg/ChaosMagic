@@ -8,3 +8,5 @@ To start the server Run:
     cd react-magic
     npm start
 
+To build
+    npm run build

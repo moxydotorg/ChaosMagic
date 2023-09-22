@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import './App.css';
-import {chaosList} from './chaosList.js';
+import {chaosList, chaosDefaultCard} from './chaosList.js';
 import { encantWorldLandList } from './enchantWorldLandList';
 import { EnchantWorldLandCard } from './EnchantWorldLandCard';
-import { ChaosLandCard } from './ChaosLandCard';
-import { PersonaLandCard } from './PersonaLandCard';
-import { personaLandList } from './personaLandList';
-import { whackyLandList } from './whackyLandList';
-import { WhackyLandCard } from './WhackyLandCard';
+import { personaLandList, personaDefaultCard } from './personaLandList';
+import { whackyLandList, whackyDefaultCard} from './whackyLandList';
+import { GenericLandCard } from './GenericCard copy';
 
 
 
@@ -67,7 +65,10 @@ function App() {
       key: 'chaos',
       label: 'Chaos',
       children:  (<div className="chaosDiv">
-                    <ChaosLandCard 
+                    <GenericLandCard
+                      className={'chaosCard'} 
+                      cardList={chaosList}
+                      defaultCard={chaosDefaultCard}
                       roll={chaosDraws[chaosIndex]} 
                       key={chaosIndex}
                       onRollClick={
@@ -112,7 +113,10 @@ function App() {
       key: 'persona',
       label: 'Persona',
       children: (<div className="personaDiv">
-                  <PersonaLandCard 
+                  <GenericLandCard 
+                    className={'personaCard'}
+                    cardList={personaLandList}
+                    defaultCard={personaDefaultCard}
                     roll={personaDraws[personaIndex]} 
                     key={personaIndex}
                     onRollClick={
@@ -140,12 +144,14 @@ function App() {
                         }
                   />
                 </div>),
-    },
-    {
+    },{
       key: 'whacky',
       label: 'Whacky',
       children: (<div className="whackyDiv">
-                  <WhackyLandCard 
+                  <GenericLandCard
+                    className={'whackyCard'}
+                    cardList={whackyLandList}
+                    defaultCard={whackyDefaultCard}
                     roll={whackyDraws[whackyIndex]} 
                     key={whackyIndex}
                     onRollClick={
@@ -175,7 +181,7 @@ function App() {
                         }
                   />
                 </div>),
-    }
+    },
   ];
 
   return (

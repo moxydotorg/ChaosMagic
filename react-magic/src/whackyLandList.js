@@ -1,7 +1,7 @@
 //See chaosList.js for a more indepth description of what this file is about.
 
 //TODO: review the list for Oracle wording changes.
-export let whackyLandList = [
+export const whackyLandList = [
     {
         name: 'Time Sprint',
         text: 'Take 2 extra turns after this one.',
@@ -133,3 +133,11 @@ export let whackyLandList = [
         img: 'https://cards.scryfall.io/art_crop/front/6/2/628eda6f-f88e-4d82-a884-d1537302adb4.jpg?1680478173',
     },
 ]
+
+export const whackyDefaultCard = {
+    name: 'Welcome to WhackyLand',
+    text: 'For complete rules see <a href=\'https://i.4pcdn.org/tg/1447655855551.pdf\'>here.</a><br/>'+
+            '<ol><li>Roll for WhackyLand onlly when another roll tellls you to.</li></ol>',
+    flavor: '',
+    img: 'https://cards.scryfall.io/art_crop/front/5/8/58831a7d-60c8-431a-a172-b78a23a678f4.jpg?1678810324',
+}

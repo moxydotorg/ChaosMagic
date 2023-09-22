@@ -1,7 +1,7 @@
 //See chaosList.js for a more indepth description of what this file is about.
 
 //TODO: review the list for Oracle wording changes.
-export let personaLandList = [
+export const personaLandList = [
     { //was KGB
         name: 'Josh',
         text: 'Roll 1d6. For each opponent, lose that much life.<br/>'+
@@ -147,4 +147,12 @@ export let personaLandList = [
         flavor: '',
         img: 'https://cards.scryfall.io/art_crop/front/f/6/f6723528-8b2c-4beb-a465-800300faf158.jpg?1562946995',
     }
-]
+];
+
+export const personaDefaultCard = {
+    name: 'Welcome to Chaos',
+    text: 'For complete rules see <a href=\'https://i.4pcdn.org/tg/1447655855551.pdf\'>here.</a><br/>'+
+            '<ol><li>Roll for PersonaLand onlly when another roll tellls you to.</li></ol>',
+    flavor: '',
+    img: 'https://cards.scryfall.io/art_crop/front/5/8/58831a7d-60c8-431a-a172-b78a23a678f4.jpg?1678810324',
+}

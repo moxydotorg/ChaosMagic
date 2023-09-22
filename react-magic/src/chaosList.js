@@ -48,7 +48,7 @@
 */
 
 //TODO: review the list for Oracle wording changes.
-export let chaosList = 
+export const chaosList = 
 [
     "1 - Eureka - Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.",
     "2 - Air Strike - Put 3 Eagle tokens into play. Treat these tokens as 2/1 fliers that are considered all colors and have haste. At end of turn, sacrifice all Eagle tokens.",    
@@ -251,3 +251,20 @@ export let chaosList =
     "199 - Feast or Famine - Choose one: bury target non-black, non-artifact creature; or put a 2/2 black zombie token into play.",
     "200 - Chaos Tune - Choose any roll from the Chaos List. Resolve this roll as if it was the chosen roll.",
 ];
+
+export const chaosDefaultCard = {
+    name: 'Welcome to Chaos',
+    text: 'For complete rules see <a href=\'https://i.4pcdn.org/tg/1447655855551.pdf\'>here.</a><br/>'+
+            '<ol><li>Chaos Phase is before untap.</li>'+
+            '<li>You MUST roll, extra costs MUST be paid, no targets? the effect fizzles.</li>'+
+            '<li>Roll EnchantWorld before game starts after muligans.</li>'+
+            '<li>You get a "saving roll" when you die, heal to zero if the roll gives extra life congrats!</li>'+
+            '<li>Chaos is colorless.</li>'+
+            '<li>No spells or effects allowed during Chaos Phase.</li>'+
+            '<li>Triggered Effects still trigger.</li>'+
+            '<li>EnchantWorlds are enchantments.</li>'+
+            '<li>Counter-rolls and Fork-rolls are rolls themselves when used.</li>'+
+            '<li>Ignore rolls that give you extra rolls on extra rolls.</li></ol>',
+    flavor: '',
+    img: 'https://cards.scryfall.io/art_crop/front/5/8/58831a7d-60c8-431a-a172-b78a23a678f4.jpg?1678810324',
+};
