@@ -1,0 +1,10 @@
+Installed Node.js
+Ran:
+    npx create-react-app react-magic
+    cd react-magic
+    npm install antd @ant-design/icons
+
+To start the server Run:
+    cd react-magic
+    npm start
+

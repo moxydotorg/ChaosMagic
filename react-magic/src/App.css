@@ -1,0 +1,100 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chaosDiv, .personaDiv, .whackyDiv{
+  display:flex;
+  justify-content: center;
+  text-align:center;
+}
+
+.enchantDiv{
+  justify-content: center;
+  text-align: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .enchantCard{
+    display: inline-block;
+    margin: 10px;
+    max-width: 50vw;
+    min-width: 50vw;
+    vertical-align: top;
+    .ant-card-body{
+      white-space: normal;
+    }
+  }
+
+  /* Adjust the right margin and the scroll margin
+    to pulll the card completelyl into view
+    */
+  .enchantCard.focused{
+    margin-right: 25vw;
+    scroll-margin-right:calc(25vw);
+  }
+  /* Prevent the first card in the list from having
+     a different amount of space to the second card
+     because of the focused class changing the right margin
+     */
+  .enchantCard:first-of-type{
+    margin-right: 10px;
+  }
+}
+
+.chaosCard, .personaCard, .whackyCard{
+  max-width: 50vw;
+  min-width: 50vw;
+  .ant-card-cover{
+    justify-content: center;
+    display: flex;
+  }
+  .ant-card-cover img{
+    max-width: 50vw;
+  }
+  .ant-card-body{
+    min-height: 30vh;
+  }
+  .ant-card-meta-description{
+    margin-bottom: 10px;
+  }
+}
+
+.rollSearchInput{
+  width: 25vw;
+}

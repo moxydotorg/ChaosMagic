@@ -48,7 +48,7 @@
 */
 
 //TODO: review the list for Oracle wording changes.
-let chaosList = 
+export let chaosList = 
 [
     "1 - Eureka - Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.",
     "2 - Air Strike - Put 3 Eagle tokens into play. Treat these tokens as 2/1 fliers that are considered all colors and have haste. At end of turn, sacrifice all Eagle tokens.",    
