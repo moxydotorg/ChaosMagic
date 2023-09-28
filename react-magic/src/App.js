@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import './App.css';
 import {chaosList, chaosDefaultCard} from './chaosList.js';
-import { encantWorldLandList } from './enchantWorldLandList';
+import { encantWorldLandList, enchantDefaultCard } from './enchantWorldLandList';
 import { EnchantWorldLandCard } from './EnchantWorldLandCard';
 import { personaLandList, personaDefaultCard } from './personaLandList';
 import { whackyLandList, whackyDefaultCard} from './whackyLandList';
@@ -18,6 +18,8 @@ function EnchantTab( {onRollClick, onDeleteClick, draws, onSearchClick} ){
     items = [...draws.slice(0,-1).map(
                   (roll, index)=>{
                     return(<EnchantWorldLandCard 
+                              cardList={encantWorldLandList}
+                              defaultCard={enchantDefaultCard}
                               focus={false} 
                               key={index} 
                               roll={roll} 
@@ -28,6 +30,8 @@ function EnchantTab( {onRollClick, onDeleteClick, draws, onSearchClick} ){
                             />);
                   }),
                   <EnchantWorldLandCard 
+                      cardList={encantWorldLandList}
+                      defaultCard={enchantDefaultCard}
                       focus={true} key={draws.length-1} 
                       roll={draws[draws.length-1]} 
                       rollIndex={draws.length-1} 
@@ -40,7 +44,7 @@ function EnchantTab( {onRollClick, onDeleteClick, draws, onSearchClick} ){
     <div className="enchantDiv">
       {draws.length === 0 && 
         //default first card
-        <EnchantWorldLandCard rollIndex={-1} onRollClick={onRollClick} onSearchClick={(num)=>onSearchClick(num)}/>
+        <EnchantWorldLandCard className='enchantCard' cardList={encantWorldLandList} defaultCard={enchantDefaultCard} rollIndex={-1} onRollClick={onRollClick} onSearchClick={(num)=>onSearchClick(num)}/>
       }
       {items}
     </div>
@@ -70,6 +74,7 @@ function App() {
                       cardList={chaosList}
                       defaultCard={chaosDefaultCard}
                       roll={chaosDraws[chaosIndex]} 
+                      rollIndex={chaosIndex}
                       key={chaosIndex}
                       onRollClick={
                         ()=>{
@@ -118,6 +123,7 @@ function App() {
                     cardList={personaLandList}
                     defaultCard={personaDefaultCard}
                     roll={personaDraws[personaIndex]} 
+                    rollIndex={personaIndex}
                     key={personaIndex}
                     onRollClick={
                       ()=>{
@@ -153,6 +159,7 @@ function App() {
                     cardList={whackyLandList}
                     defaultCard={whackyDefaultCard}
                     roll={whackyDraws[whackyIndex]} 
+                    rollIndex={whackyIndex}
                     key={whackyIndex}
                     onRollClick={
                       ()=>{

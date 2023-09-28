@@ -16,7 +16,7 @@ const aDefaultCard = {
   img:''
 }
 
-export function GenericLandCard({ roll=-1, hasPrevious=false, hasNext=false, onUndoClick, onRollClick, onRedoClick, onSearchClick, className, cardList=[], defaultCard=aDefaultCard}){
+export function GenericLandCard({ roll=-1, rollIndex=-1, hasPrevious=false, hasNext=false, onUndoClick, onRollClick, onRedoClick, onSearchClick, className, cardList=[], defaultCard=aDefaultCard}){
   const[searchValue, setSearchValue] = useState('1');
     var imgSrc,title,description,text;
 
@@ -62,6 +62,9 @@ export function GenericLandCard({ roll=-1, hasPrevious=false, hasNext=false, onU
             actions={actionItems}>
             <Meta title={title + ((roll >= 0)?' - ('+(roll+1)+')':'')} description={description} />
             {text}
+            <div className='rollIndex'>
+            {(rollIndex >= 0) && rollIndex+1}
+            </div>
         </Card>
     );
 }

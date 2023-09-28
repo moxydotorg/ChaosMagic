@@ -26,3 +26,11 @@ export let encantWorldLandList = [
 ]
 
 //arboria might be good to add.
+
+export const enchantDefaultCard = {
+    name: 'Welcome to Chaos',
+    text: 'For complete rules see <a href=\'https://i.4pcdn.org/tg/1447655855551.pdf\'>here.</a><br/>'+
+        '<ol><li>Roll EnchantWorld before game starts after muligans.</li><li>EnchantWorlds are enchantments.</li></ol>',
+    flavor: '',
+    img: 'https://cards.scryfall.io/art_crop/front/5/8/58831a7d-60c8-431a-a172-b78a23a678f4.jpg?1678810324',
+}

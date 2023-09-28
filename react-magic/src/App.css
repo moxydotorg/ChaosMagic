@@ -44,13 +44,46 @@
 }
 
 .enchantDiv{
-  justify-content: center;
+  /* justify-content: center; */
+  margin: auto;
   text-align: center;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
+  display: flex;
+  margin-left:auto;
+  margin-right: auto;
 
   .enchantCard{
+    /* display: inline-block; */
+    display: table-cell;
+    margin: 10px;
+    max-width: 50vw;
+    min-width: 50vw;
+    vertical-align: top;
+  }
+  .ant-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .ant-card-cover{
+
+    }
+    .ant-card-body{
+      white-space: initial;
+      text-align: left;
+    }
+    .ant-card-actions{
+
+    }
+  }
+  .ant-card-meta-title, .ant-card-meta-description{
+    text-align: center;
+  }
+
+
+  /*
+  .enchantCardDefault{
     display: inline-block;
     margin: 10px;
     max-width: 50vw;
@@ -58,8 +91,10 @@
     vertical-align: top;
     .ant-card-body{
       white-space: normal;
+      min-height: 20vh;
     }
   }
+  */
 
   /* Adjust the right margin and the scroll margin
     to pulll the card completelyl into view
@@ -74,12 +109,15 @@
      */
   .enchantCard:first-of-type{
     margin-right: 10px;
+    margin-left: 30%;
   }
 }
 
 .chaosCard, .personaCard, .whackyCard{
+  /*
   max-width: 50vw;
   min-width: 50vw;
+  */
   .ant-card-cover{
     justify-content: center;
     display: flex;
@@ -89,10 +127,21 @@
   }
   .ant-card-body{
     min-height: 30vh;
+    text-align: left;
   }
   .ant-card-meta-description{
     margin-bottom: 10px;
+    text-align: center;
   }
+  .ant-card-meta-title{
+    text-align: center;
+  }
+}
+
+.rollIndex{
+  margin-top: 40px;
+  color: lightgray;
+  text-align: center !important;
 }
 
 .rollSearchInput{
