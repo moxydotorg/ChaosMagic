@@ -6,7 +6,7 @@ import { encantWorldLandList, enchantDefaultCard } from './enchantWorldLandList'
 import { EnchantWorldLandCard } from './EnchantWorldLandCard';
 import { personaLandList, personaDefaultCard } from './personaLandList';
 import { whackyLandList, whackyDefaultCard} from './whackyLandList';
-import { GenericLandCard } from './GenericCard copy';
+import { GenericLandCard } from './GenericCard';
 
 
 
