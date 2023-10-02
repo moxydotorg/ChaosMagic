@@ -4,15 +4,25 @@
 */
 
 /*
-    This creates an array of strings. Arrays are basically zero indexed lists of things. Each array item can be refered 
+    This creates an array of dictionaries. Arrays are basically zero indexed lists of things. Each array item can be refered 
     to indivudally by using a notation such as:
     chaosList[0] 
     for the first item or
     chaosList[3] for the 4th item
 
-    If you have an integer in a variable you can also reference it like:
+    Dictionaries are lists of key -> value pairs. You get the value of the pair by referencing the key. You use a notation like:
+    dictionary.name 
+    to get the value of the name key or to set it you can use
+    dictionary.name = 'some new name'
+
+    Combining these you can reference the particular dictionary you want to use with the array syntax 
+    and the particular from the dictionary after that. So if we want the 5 array item's text entry we would do:
+    chaosList[4].text
+
+    If you have an integer in a variable you can also use it to reference the array like:
     chaosList[x]
-    for the x th entry.
+    for the x th entry. or to get the img entry:
+    chaosList[x].img
 
     You can find out the size or length of the array by using the length attribute such as:
     let size = chaosList.length; 
@@ -25,7 +35,12 @@
     let lastEntry = chaosList[chaosList.length-1];
 
     When initializing arrays like we are here we use [ & ] to denote the beginning and end of the list.
-    Inside the bracket's we use a comma seperated list of values, in this case it's all strings.
+    Inside the bracket's we use a comma seperated list of values, in this case it's dictionaries.
+
+    Dictionaries are defined inside curly brackets { & } inside the curly brackets you specify the 
+    key followed by a : and then the value seperate each key-value entry with a comma. 
+    In this case all our values are strings.
+    
 
     Strings are dentoed with either double or single quotes around the string content.
     If a string contains a double quote try to use a single quote around the content.
@@ -45,18 +60,23 @@
     The copy/paste included the roll number folllowed by a -.
     I don't think we need to keep the roll number if you want to take that out that's fine.
     If we need to know what number was rolled I can calculate that and display it when it's rolled.
+
+    I've been snagging the image url from scryfall.com.
+    Look up the card whose image you want to use (can be art cards even) on the card detail page, at the bottom
+    under the "Images and Data" secotion copy the link to "Download Art Crop" that's a crop of just the artwork
+    rotated properly. Should include both arts for things like the split cards.
 */
 
 //TODO: review the list for Oracle wording changes.
 export const chaosList = 
 [
-//    {
-//        name: 'Eureka',
-//        text: 'Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.',
-//        img: 'https://cards.scryfall.io/art_crop/front/3/c/3c878780-f666-44ab-a60e-c9985f628fc3.jpg?1562546496',
-//        flavor: 'e=mc^2',
-//    },
-    "1 - Eureka - Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.",
+    {
+        name: 'Eureka',
+        text: 'Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.',
+        img: 'https://cards.scryfall.io/art_crop/front/3/c/3c878780-f666-44ab-a60e-c9985f628fc3.jpg?1562546496',
+        flavor: 'e=mc^2',
+    },
+//    "1 - Eureka - Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.",
     "2 - Air Strike - Put 3 Eagle tokens into play. Treat these tokens as 2/1 fliers that are considered all colors and have haste. At end of turn, sacrifice all Eagle tokens.",    
     "3- Feldon's Cane - Reshuffle your graveyard into your library.",
     "4 - Enchant WorldLand - Roll in EnchantWorldLand.",
@@ -258,6 +278,9 @@ export const chaosList =
     "200 - Chaos Tune - Choose any roll from the Chaos List. Resolve this roll as if it was the chosen roll.",
 ];
 
+
+// This is the card data is pulled from if we try to show a card that isn't in the list above. 
+// or if there's an entry in the list above that's missing information (such as images right now).
 export const chaosDefaultCard = {
     name: 'Welcome to Chaos',
     text: 'For complete rules see <a href=\'https://i.4pcdn.org/tg/1447655855551.pdf\'>here.</a><br/>'+
