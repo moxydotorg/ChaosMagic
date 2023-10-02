@@ -50,6 +50,12 @@
 //TODO: review the list for Oracle wording changes.
 export const chaosList = 
 [
+//    {
+//        name: 'Eureka',
+//        text: 'Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.',
+//        img: 'https://cards.scryfall.io/art_crop/front/3/c/3c878780-f666-44ab-a60e-c9985f628fc3.jpg?1562546496',
+//        flavor: 'e=mc^2',
+//    },
     "1 - Eureka - Beginning with you and proceeding in turn order, each player may choose a planeswalker, creature, enchantment, artifact, or land card in their hand and put that card into play. Continue until each player in turn has declined to put a card into play.",
     "2 - Air Strike - Put 3 Eagle tokens into play. Treat these tokens as 2/1 fliers that are considered all colors and have haste. At end of turn, sacrifice all Eagle tokens.",    
     "3- Feldon's Cane - Reshuffle your graveyard into your library.",
