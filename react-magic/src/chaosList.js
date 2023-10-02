@@ -65,6 +65,9 @@
     Look up the card whose image you want to use (can be art cards even) on the card detail page, at the bottom
     under the "Images and Data" secotion copy the link to "Download Art Crop" that's a crop of just the artwork
     rotated properly. Should include both arts for things like the split cards.
+
+    see whackyLandList.js or personaLandList.js for what this file should ultimately look like when
+    we're done checking the cards and updating them from string entries to dictionaries.
 */
 
 //TODO: review the list for Oracle wording changes.
