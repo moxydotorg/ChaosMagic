@@ -25,7 +25,7 @@
     let lastEntry = chaosList[chaosList.length-1];
 
     When initializing arrays like we are here we use [ & ] to denote the beginning and end of the list.
-    Inside the bracket's we use a comma seperated list of values, in this case it's all strings.
+    Inside the bracket's we use a comma seperated list of values, in this case it's all strings, well I guess technically it's a named list of strings.
 
     Strings are dentoed with either double or single quotes around the string content.
     If a string contains a double quote try to use a single quote around the content.
@@ -42,26 +42,21 @@
     
     Each entry is a different "roll" on the list.
     Editing this string changes what is displayed when that line is rolled.
-    The copy/paste included the roll number folllowed by a -.
-    I don't think we need to keep the roll number if you want to take that out that's fine.
     If we need to know what number was rolled I can calculate that and display it when it's rolled.
-*/
 
-/*
-const chaosList = [
-        { name: "Chaotic Surge", 
-		picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Chaos+1&font=lora", 
-		effect: "At the beginning of each player's upkeep, that player flips a coin. If they lose the flip, they sacrifice a nonland permanent." 
-	},
-        { name: "Mana Scramble", picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Chaos+2&font=lora", effect: "Whenever a player taps a land for mana, that player adds one mana of a random color to their mana pool instead of the mana that land would normally produce." },
-        { name: "Creature Frenzy", picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Chaos+3&font=lora", effect: "All creatures have haste and attack each combat if able." },
-        { name: "Spell Roulette", picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Chaos+4&font=lora", effect: "Whenever a player casts a spell, they choose a target for that spell at random from all legal targets." },
-        { name: "Planar Collapse", picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Chaos+5&font=lora", effect: "At the end of each turn, destroy all permanents that entered the battlefield this turn." }
-    ];
+    Each entry should have a name, picture, and effect. 
+    Picture displays when drawn at the top of the play area
+    Name displays just below the picture and as a header in the in-effect and discard areas
+    Effect displays just below the name in the drawn, in-effect, and discard areas
+    
+    Effect can contain additional HTML. This is useful for modal spells or lists of things. Unordered lists "<ul>" is common here.
+    Effect can also contain symbol tags see: https://scryfall.com/docs/api/colors for a list of symbols. 
+     --Newer symbols may require an update to the scryfall-symbols.css file to support a new svg of that symbol.
 */
 
 //TODO: review the list for Oracle wording changes.
 //TODO: maybe standardize on how much colorless mana makes up for a colored mana and edit all the alt costs to be consistent.
+
 const chaosList = 
 [
     {
