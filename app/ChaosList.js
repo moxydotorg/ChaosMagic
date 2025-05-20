@@ -51,7 +51,7 @@
     
     Effect can contain additional HTML. This is useful for modal spells or lists of things. Unordered lists "<ul>" is common here.
     Effect can also contain symbol tags see: https://scryfall.com/docs/api/colors for a list of symbols. 
-     --Newer symbols may require an update to the scryfall-symbols.css file to support a new svg of that symbol.
+     --Newer symbols may require an update to the symbols.css file to support a new svg of that symbol.
 */
 
 //TODO: review the list for Oracle wording changes.

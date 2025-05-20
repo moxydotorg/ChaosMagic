@@ -1,5 +1,7 @@
 //See chaosList.js for a more indepth description of what this file is about.
 
+// flavor is vestigial and isn't used. It can be removed or we can incorporate it into the design and add it to the other files.
+
 //TODO: review the list for Oracle wording changes.
 //TODO: can we change it to display an HTML element?
 const personaList = [

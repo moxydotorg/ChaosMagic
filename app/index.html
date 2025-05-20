@@ -27,14 +27,31 @@
             display: flex; align-items: center; justify-content: center;
             line-height: 1; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
-        .view-discard-button { transition: all 0.2s ease-in-out; font-size: 0.8rem; padding-top: 0.4rem; padding-bottom: 0.4rem; }
-        .view-discard-button:hover { transform: translateY(-1px); }
+        .deck-action-button { 
+            transition: all 0.2s ease-in-out; 
+            font-size: 0.8rem; 
+            padding-top: 0.4rem; 
+            padding-bottom: 0.4rem; 
+            font-medium;
+        }
+        .deck-action-button:hover { transform: translateY(-1px); }
         .card { transition: all 0.3s ease-in-out; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .effect-item { transition: background-color 0.2s ease; }
         .effect-item-icon { margin-right: 0.75rem; flex-shrink: 0; width: 1.25rem; height: 1.25rem; }
         .effect-item:hover { background-color: #4A5568; }
         .btn-action { transition: background-color 0.2s ease, transform 0.1s ease; }
         .btn-action:active { transform: scale(0.98); }
+        .btn-modal-action {
+            padding: 0.25rem 0.5rem; 
+            font-size: 0.75rem; 
+            border-radius: 0.375rem; 
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+            margin-left: 0.5rem; 
+        }
+        .btn-icon-modal {
+            padding: 0.375rem;
+            margin-left: 0.5rem;
+        }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #2D3748; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #718096; border-radius: 10px; }
@@ -48,7 +65,8 @@
         .modal-content {
             background-color: #2D3748; color: #E2E8F0; margin: auto;
             padding: 20px; border-radius: 8px; width: 90%;
-            max-width: 500px; max-height: 80vh; display: flex;
+            max-width: 600px; /* Increased max-width for better readability of card lists */
+            max-height: 80vh; display: flex;
             flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
         .modal-header {
@@ -62,42 +80,54 @@
         }
         .modal-close-button:hover, .modal-close-button:focus { color: #FFFFFF; text-decoration: none; }
         .modal-body { overflow-y: auto; flex-grow: 1; }
-        .discarded-card-item { background-color: #4A5568; padding: 10px; border-radius: 6px; margin-bottom: 8px; }
-        .discarded-card-item h4 { font-weight: 600; color: #B794F4; margin-bottom: 4px; }
-        .discarded-card-item p { font-size: 0.875rem; color: #CBD5E0; }
+        
+        /* Styles for items in both discard and all cards modals */
+        .modal-card-item { 
+            background-color: #4A5568; padding: 10px; border-radius: 6px; margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .modal-card-item-content {
+            flex-grow: 1;
+            margin-right: 0.5rem; /* Space between text and button (if any) */
+        }
+        .modal-card-item h4 { font-weight: 600; color: #B794F4; margin-bottom: 4px; }
+        .modal-card-item p { font-size: 0.875rem; color: #CBD5E0; margin-bottom: 0.25rem; }
+
         .card-symbol-E, .card-symbol-P, .card-symbol-PW, .card-symbol-CHAOS, .card-symbol-TK, .card-symbol-H, .card-symbol-L, .card-symbol-D{
             background-color:#CAC5C0; /* Ensure this is visible or adjust as needed */
             /* Consider adding padding/margin if symbols.css doesn't handle it well */
         }
         .dice-button {
-            background-color: #4A5568; /* bg-gray-700 */
+            background-color: #4A5568; 
             color: white;
-            padding: 0.5rem 0.75rem; /* py-2 px-3 */
-            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             transition: background-color 0.2s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            margin: 0 0.25rem; /* mx-1 */
+            margin: 0 0.25rem; 
         }
         .dice-button:hover {
-            background-color: #2D3748; /* bg-gray-800 */
+            background-color: #2D3748;
         }
         .dice-button svg {
-            width: 1.5rem; /* w-6 */
-            height: 1.5rem; /* h-6 */
-            margin-right: 0.5rem; /* mr-2 */
+            width: 1.5rem; 
+            height: 1.5rem;
+            margin-right: 0.5rem;
         }
         #diceResult {
-            margin-top: 0.75rem; /* mt-3 */
-            padding: 0.5rem; /* p-2 */
-            background-color: #1A202C; /* bg-gray-900, slightly darker than body for emphasis */
-            border-radius: 0.375rem; /* rounded-md */
-            min-height: 2.5rem; /* Ensure it has some height even when empty */
+            margin-top: 0.75rem; 
+            padding: 0.5rem; 
+            background-color: #1A202C;
+            border-radius: 0.375rem; 
+            min-height: 2.5rem; 
             text-align: center;
-            color: #A0AEC0; /* text-gray-400 */
-            font-weight: 500; /* font-medium */
+            color: #A0AEC0; 
+            font-weight: 500;
         }
     </style>
     <link href="./symbols.css" rel="stylesheet">
@@ -111,10 +141,10 @@
 
         <section id="decksSection" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             <div class="deck-button-wrapper">
-                <button data-deck="chaos" class="deck-button bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
+                <button data-deck="chaos" class="deck-button bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
                     Chaos Deck <span id="count-chaos" class="deck-draw-counter">0</span>
                 </button>
-                <button data-view-discard="chaos" class="view-discard-button bg-red-800 hover:bg-red-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
+                <button data-view-discard="chaos" class="deck-action-button bg-green-800 hover:bg-green-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
             </div>
             <div class="deck-button-wrapper">
                 <button data-deck="realm" class="deck-button bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
@@ -123,16 +153,16 @@
                 <button data-view-discard="realm" class="view-discard-button bg-blue-800 hover:bg-blue-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
             </div>
             <div class="deck-button-wrapper">
-                <button data-deck="persona" class="deck-button bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
+                <button data-deck="persona" class="deck-button bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
                     Persona <span id="count-persona" class="deck-draw-counter">0</span>
                 </button>
-                <button data-view-discard="persona" class="view-discard-button bg-green-800 hover:bg-green-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
+                <button data-view-discard="persona" class="view-discard-button bg-red-800 hover:bg-red-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
             </div>
             <div class="deck-button-wrapper">
-                <button data-deck="whacky" class="deck-button bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
-                    Whacky Rules <span id="count-whacky" class="deck-draw-counter text-black" style="background-color: rgba(255,255,255,0.7);">0</span>
+                <button data-deck="whacky" class="deck-button bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md h-24 sm:h-32 flex items-center justify-center text-center">
+                    Whacky Rules <span id="count-whacky" class="deck-draw-counter text-white" >0</span>
                 </button>
-                <button data-view-discard="whacky" class="view-discard-button bg-yellow-700 hover:bg-yellow-800 text-black font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
+                <button data-view-discard="whacky" class="view-discard-button bg-purple-800 hover:bg-purple-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1 w-full">View Discards</button>
             </div>
         </section>
 
@@ -165,47 +195,43 @@
             <section id="diceRollerSection" class="mb-6 bg-gray-800 p-4 rounded-lg">
                 <h3 class="text-lg font-semibold text-purple-300 mb-3">Roll a Die</h3>
                 <div class="flex justify-center space-x-2 sm:space-x-3">
-                    <!-- add D2 for coin?-->
-                    <!-- add D3 -->
                     <button id="rollD2" class="dice-button" title="Roll D2">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <title>D2</title>
-                            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" fill="none"/>
-                            <text x="12" y="16" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">2</text>
-                          </svg>
-                          D2
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <text x="12" y="16" font-family="sans-serif" font-size="10" fill="currentColor" text-anchor="middle">2</text>
+                          </svg> D2
                     </button>
                     <button id="rollD3" class="dice-button" title="Roll D3">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <title>D3</title>
-                            <path d="M12 2 L22 20 L2 20 Z" stroke="white" stroke-width="1.5" fill="none"/>
-                            <text x="12" y="17" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">3</text>
-                          </svg>
-                          D3
+                            <path d="M12 2 L22 20 L2 20 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <text x="12" y="17" font-family="sans-serif" font-size="10" fill="currentColor" text-anchor="middle">3</text>
+                          </svg> D3
                     </button>
                     <button id="rollD4" class="dice-button" title="Roll D4">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <title>D4</title>
-                            <path d="M12 3 L21 19 H3 Z" stroke="white" stroke-width="1.5" fill="none"/>
-                            <text x="12" y="17" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">4</text>
+                            <path d="M12 3 L21 19 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <text x="12" y="17" font-family="sans-serif" font-size="10" fill="currentColor" text-anchor="middle">4</text>
                           </svg> D4
                     </button>
                     <button id="rollD6" class="dice-button" title="Roll D6">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <title>D6</title>
-                            <rect x="4" y="4" width="16" height="16" rx="2" stroke="white" stroke-width="1.5" fill="none"/>
-                            <circle cx="8" cy="8" r="1.5" fill="white"/>
-                            <circle cx="16" cy="8" r="1.5" fill="white"/>
-                            <circle cx="8" cy="16" r="1.5" fill="white"/>
-                            <circle cx="12" cy="12" r="1.5" fill="white"/>
-                            <circle cx="16" cy="16" r="1.5" fill="white"/>
+                            <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+                            <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+                            <circle cx="8" cy="16" r="1.5" fill="currentColor"/>
+                            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                            <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
                           </svg> D6
                     </button>
                     <button id="rollD10" class="dice-button" title="Roll D10">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <title>D10</title>
-                            <path d="M12 2 L18.18 5.31 L20.93 11.25 L17.07 17.69 L12 20 L6.93 17.69 L3.07 11.25 L5.82 5.31 Z" stroke="white" stroke-width="1.5" fill="none"/>
-                            <text x="11.5" y="13.5" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">10</text>
+                            <path d="M12 2 L18.18 5.31 L20.93 11.25 L17.07 17.69 L12 20 L6.93 17.69 L3.07 11.25 L5.82 5.31 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <text x="11.5" y="13.5" font-family="sans-serif" font-size="7" fill="currentColor" text-anchor="middle">10</text>
                           </svg> D10
                     </button>
                 </div>
@@ -215,6 +241,7 @@
             </section>
 
             <section class="mb-6">
+                <button id="deckListsButton" class="mx-3 bg-gray-600 hover:bg-gray-700 text-whilte font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">Deck List Options</button>
                 <button id="resetButton" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">Reset Game</button>
             </section>
 
@@ -262,7 +289,47 @@
             </div>
         </div>
     </div>
-        
+
+    <div id="allCardsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="allCardsModalTitle" class="modal-title">All Cards in Deck</h3>
+                <button id="closeAllCardsModalButton" class="modal-close-button">&times;</button>
+            </div>
+            <div id="allCardsModalBody" class="modal-body">
+                <p id="emptyAllCardsMessage" class="text-gray-500 text-center">This deck is currently empty or data is unavailable.</p>
+                </div>
+        </div>
+    </div>
+
+    <div id="deckListOptionsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="deckListOptionsModalTitle" class="modal-title">Deck List Options</h3>
+                <button id="closeDeckListOptionsModalButton" class="modal-close-button">&times;</button>
+            </div>
+            <div id="deckListOptionsModalBody" class="modal-body">
+                <p id="defaultDeckListOptionsMessage" class="text-center">
+                        <div>
+                            Settings buttons maybe?:
+                            <section class="mb-6">
+                                <button deckListOptionsTest="testButton" id="testButton" class="h-11 deck-action-button bg-orange-800 hover:bg-orange-900 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1">Test Button</button>
+                            </section>
+                        </div>
+                        <div>    
+                        View Decks:
+                        <section id="deckListOptionButtonsSection" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6"> 
+                            <button data-view-all="chaos" class="h-11 deck-action-button bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1">Chaos Deck</button>
+                            <button data-view-all="realm" class="h-11 deck-action-button bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1">Realm Enchantments</button>
+                            <button data-view-all="persona" class="h-11 deck-action-button bg-red-600 hover:bg-red-700 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1">Persona Deck</button>
+                            <button data-view-all="whacky" class="h-11 deck-action-button bg-purple-600 hover:bg-purple-700 text-white font-medium py-1 px-2 rounded-md shadow-sm mt-1">Whacky Deck</button>
+                        </section>
+                        </div>
+                </p>
+                </div>
+        </div>
+    </div>
+    
     <script>
         // Main Application Logic
         document.addEventListener('DOMContentLoaded', async () => { // Made DOMContentLoaded async
@@ -278,13 +345,30 @@
             const activeEffectsContainer = document.getElementById('activeEffectsContainer');
             const noActiveEffectsMessage = document.getElementById('noActiveEffects');
             const resetButton = document.getElementById('resetButton');
+            const deckListsButton = document.getElementById('deckListsButton');
+            const testButton = document.getElementById('testButton');
 
-            // Modal DOM Elements
+            // Discard Modal DOM Elements
             const discardModal = document.getElementById('discardModal');
             const discardModalTitle = document.getElementById('discardModalTitle');
             const discardModalBody = document.getElementById('discardModalBody');
             const closeDiscardModalButton = document.getElementById('closeDiscardModalButton');
             const emptyDiscardMessage = document.getElementById('emptyDiscardMessage');
+
+            // All Cards Modal DOM Elements
+            const allCardsModal = document.getElementById('allCardsModal');
+            const allCardsModalTitle = document.getElementById('allCardsModalTitle');
+            const allCardsModalBody = document.getElementById('allCardsModalBody');
+            const closeAllCardsModalButton = document.getElementById('closeAllCardsModalButton');
+            const emptyAllCardsMessage = document.getElementById('emptyAllCardsMessage');
+
+            // Deck Lists Options Modal DOM elements
+            const deckListOptionsModal = document.getElementById('deckListOptionsModal');
+            const deckListOptionsModalTitle = document.getElementById('deckListOptionsModalTitle');
+            const deckListOptionsModalBody = document.getElementById('deckListOptionsModalBody');
+            const closeDeckListOptionsModalButton = document.getElementById('closeDeckListOptionsModalButton');
+            const defaultDeckListOptionsMessage = document.getElementById('defaultDeckListOptionsMessage');
+            const deckListOptionButtonsSection = document.getElementById('deckListOptionButtonsSection');
 
             // Dice Roller Elements
             const rollD2Button = document.getElementById('rollD2');
@@ -300,7 +384,7 @@
             let discardPiles = { chaos: [], realm: [], persona: [], whacky: [] };
             let drawnCounts = { chaos: 0, realm: 0, persona: 0, whacky: 0 };
 
-            const deckIcons = { /* ... (icons as before) ... */ 
+            const deckIcons = { 
                 chaos: `<svg class="w-full h-full text-red-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path><path d="M10 3.5A6.5 6.5 0 003.5 10H2a8 8 0 115.075-7.559L5.95 3.55A6.502 6.502 0 0010 3.5zM16.5 10A6.5 6.5 0 0010 3.5V2a8 8 0 11-7.559 5.075L3.55 5.95A6.502 6.502 0 0016.5 10z"></path></svg>`,
                 realm: `<svg class="w-full h-full text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>`,
                 persona: `<svg class="w-full h-full text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>`,
@@ -310,42 +394,32 @@
             let allDecks = {}; 
 
             const ManaSymbolService = (() => {
-                let symbolMap = null; // Cached data
-                let isFetching = false;
+                let symbolMap = null; 
                 let fetchPromise = null;
 
                 async function fetchSymbolMap() {
                     if (symbolMap) return symbolMap;
-
                     if (!fetchPromise) {
                         fetchPromise = fetch('https://api.scryfall.com/symbology')
                             .then(res => res.json())
                             .then(data => {
                                 if (!data || !data.data) throw new Error('Invalid symbol data');
-
                                 const map = {};
                                 data.data.forEach(symbol => {
                                     const match = symbol.symbol.match(/^\{([^{}\s]+)\}$/);
-                                    if (match) {
-                                        map[match[1]] = symbol.english;
-                                    }
+                                    if (match) map[match[1]] = symbol.english;
                                 });
-
                                 symbolMap = map;
                                 return symbolMap;
                             })
                             .catch(err => {
                                 console.error("Failed to fetch mana symbols:", err);
-                                throw err;
+                                throw err; // Propagate error
                             });
                     }
-
                     return fetchPromise;
                 }
-
-                return {
-                    getSymbolMap: async () => await fetchSymbolMap(),
-                };
+                return { getSymbolMap: async () => await fetchSymbolMap() };
             })();
             
             async function replaceManaSymbols(effectText) {
@@ -382,19 +456,16 @@
             function insertDiceRollResults(input) {
                 // Match patterns like 1d6, 2d8+3, 3d12-1, etc.
                 const dicePattern = /\b(\d+)d(\d+)([+-]\d+)?\b/g;
-
                 return input.replace(dicePattern, (match, numDice, diceSides, modifier) => {
                     numDice = parseInt(numDice, 10);
                     diceSides = parseInt(diceSides, 10);
                     let modValue = modifier ? parseInt(modifier, 10) : 0;
-
                     // Roll the dice
                     let total = 0;
                     for (let i = 0; i < numDice; i++) {
                         total += Math.floor(Math.random() * diceSides) + 1; // [1, diceSides]
                     }
                     total += modValue;
-
                     // Return original match with result in parentheses
                     return `${match} <i>(Rolled: ${total})</i>`;
                 });
@@ -455,28 +526,21 @@
                 return; // Stop further script execution
             }
 
-
             // --- Helper Functions ---
             const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
 
-            const updateDrawnCardDisplay = () => { // No longer async, uses pre-processed effects
+            const updateDrawnCardDisplay = () => { 
                 if (currentlyDrawnCard) {
                     drawnCardImage.src = currentlyDrawnCard.card.picture;
                     drawnCardImage.alt = currentlyDrawnCard.card.name;
                     drawnCardName.textContent = currentlyDrawnCard.card.name;
-                    drawnCardEffect.innerHTML = insertDiceRollResults(currentlyDrawnCard.card.effect); // Effect is already processed
+                    drawnCardEffect.innerHTML = insertDiceRollResults(currentlyDrawnCard.card.effect); 
                     
                     drawnCardEffect.classList.add('text-left'); 
-
                     const unorderedLists = drawnCardEffect.querySelectorAll('ul');
-                    unorderedLists.forEach(ul => {
-                        ul.classList.add('list-disc', 'list-inside', 'pl-5', 'mb-2');
-                    });
+                    unorderedLists.forEach(ul => ul.classList.add('list-disc', 'list-inside', 'pl-5', 'mb-2'));
                     const orderedLists = drawnCardEffect.querySelectorAll('ol');
-                    orderedLists.forEach(ol => {
-                        ol.classList.add('list-decimal', 'list-inside', 'pl-5', 'mb-2');
-                    });
-
+                    orderedLists.forEach(ol => ol.classList.add('list-decimal', 'list-inside', 'pl-5', 'mb-2'));
                     drawnCardSection.style.display = 'flex';
                     placeholderDrawnCard.style.display = 'none';
                 } else {
@@ -486,7 +550,7 @@
                 }
             };
 
-            const updateActiveEffectsDisplay = () => { /* ... (no change to replaceManaSymbols call, it was already correct) ... */ 
+            const updateActiveEffectsDisplay = () => { 
                 activeEffectsContainer.innerHTML = ''; 
                 if (activeEffects.length === 0) {
                     activeEffectsContainer.appendChild(noActiveEffectsMessage); 
@@ -504,7 +568,7 @@
 
                         const effectTextPara = document.createElement('p');
                         effectTextPara.className = 'text-sm text-gray-200 flex-grow mr-2';
-                        effectTextPara.innerHTML = effect.effectText; // Effect is already processed
+                        effectTextPara.innerHTML = effect.effectText; 
                         
                         const unorderedLists = effectTextPara.querySelectorAll('ul');
                         unorderedLists.forEach(ul => ul.classList.add('list-disc', 'list-inside', 'pl-5', 'mb-2'));
@@ -523,16 +587,15 @@
                     });
                 }
             };
-            const updateDrawnCountsDisplay = () => { /* ... (no change) ... */ 
+            const updateDrawnCountsDisplay = () => { 
                 for (const deckKey in drawnCounts) {
                     const counterElement = document.getElementById(`count-${deckKey}`);
-                    if (counterElement) {
-                        counterElement.textContent = drawnCounts[deckKey];
-                    }
+                    if (counterElement) counterElement.textContent = drawnCounts[deckKey];
                 }
             };
             
-            const getNextCardNumber = (deckKey) =>{ /* ... (no change) ... */ 
+            //iterates over the decks sequentially for debugging
+            const getNextCardNumber = (deckKey) =>{ 
                 if (!getNextCardNumber.deckCounters) getNextCardNumber.deckCounters = {};
                 if (getNextCardNumber.deckCounters[deckKey] === undefined) getNextCardNumber.deckCounters[deckKey] = 0;
                 const currentCardNumber = getNextCardNumber.deckCounters[deckKey];
@@ -549,11 +612,11 @@
             };
 
             // --- Core Logic Functions ---
-            const drawCard = (deckKey) => { /* ... (no change to replaceManaSymbols call) ... */ 
+            const drawCard = (deckKey) => { 
                 if (currentlyDrawnCard) discardCurrentDrawnCard();
                 if (!allDecks[deckKey] || !allDecks[deckKey].list) { 
                     console.error(`Deck data for ${deckKey} is not available. External JS might not have loaded.`);
-                    alert(`Data for ${allDecks[deckKey] ? allDecks[deckKey].name : deckKey} deck is missing. Please check external files.`);
+                    alert(`Data for ${allDecks[deckKey] ? allDecks[deckKey].name : deckKey} deck is missing.`);
                     return;
                 }
                 const deckData = allDecks[deckKey];
@@ -574,11 +637,11 @@
                     alert(`${deckData.name} deck is currently empty.`);
                 }
             };
-            const moveCurrentToEffect = () => { /* ... (no change) ... */ 
+            const moveCurrentToEffect = () => {
                 if (currentlyDrawnCard) {
                     const newEffect = {
                         id: generateId(),
-                        effectText: currentlyDrawnCard.card.effect, // Effect is already processed
+                        effectText: currentlyDrawnCard.card.effect, 
                         originalDeckKey: currentlyDrawnCard.deckKey,
                         card: currentlyDrawnCard.card 
                     };
@@ -588,14 +651,14 @@
                     updateActiveEffectsDisplay();
                 }
             };
-            const discardCurrentDrawnCard = () => { /* ... (no change) ... */ 
+            const discardCurrentDrawnCard = () => { 
                  if (currentlyDrawnCard) {
                     discardPiles[currentlyDrawnCard.deckKey].unshift(currentlyDrawnCard.card); 
                     currentlyDrawnCard = null;
                     updateDrawnCardDisplay();
                 }
             };
-            const discardEffect = (effectId) => { /* ... (no change) ... */ 
+            const discardEffect = (effectId) => { 
                 const effectIndex = activeEffects.findIndex(effect => effect.id === effectId);
                 if (effectIndex > -1) {
                     const effectToDiscard = activeEffects[effectIndex];
@@ -605,8 +668,35 @@
                 }
             };
 
-            // --- Discard Modal Functions ---
-            const openDiscardModal = (deckKey) => { /* ... (no change to replaceManaSymbols call) ... */ 
+            const redrawCardFromDiscard = (cardToRedraw, deckKeyOfRedrawnCard) => {
+                 // 1. Handle currently displayed card (if any)
+                 if (currentlyDrawnCard) {
+                    discardCurrentDrawnCard(); // This will send it to its respective discard pile
+                }
+
+                // 2. Set the re-drawn card as the currently drawn card
+                currentlyDrawnCard = { card: cardToRedraw, deckKey: deckKeyOfRedrawnCard };
+
+                // 3. Remove the card from its discard pile
+                const pile = discardPiles[deckKeyOfRedrawnCard];
+                const cardIndexInPile = pile.findIndex(discardedCard => 
+                    discardedCard.name === cardToRedraw.name && discardedCard.effect === cardToRedraw.effect
+                ); // Find by content, assuming name+effect is unique enough for this context
+                
+                if (cardIndexInPile > -1) { //does this throw away everything behind cardIndexInPile?
+                    pile.splice(cardIndexInPile, 1);
+                } 
+
+                // 4. Update the UI
+                updateDrawnCardDisplay();
+                // No need to call updateDrawnCountsDisplay() as the count doesn't change.
+
+                // 5. Close the modal
+                closeDiscardModal();   
+            };
+
+            // --- Modal Logic: Discard Pile ---
+            const openDiscardModal = (deckKey) => { 
                 const pile = discardPiles[deckKey];
                  if (!allDecks[deckKey]) {
                     console.error(`Deck data for ${deckKey} is not available for discard modal.`);
@@ -615,8 +705,9 @@
                     discardModal.style.display = 'flex';
                     return;
                 }
-                const deckName = allDecks[deckKey].name;
-                discardModalTitle.textContent = `${deckName} Discard Pile`;
+                //const deckName = allDecks[deckKey].name;
+                //discardModalTitle.textContent = `${deckName} Discard Pile`;
+                discardModalTitle.textContent = `${allDecks[deckKey].name} Discard Pile`;
                 discardModalBody.innerHTML = ''; 
                 if (pile.length === 0) {
                     discardModalBody.appendChild(emptyDiscardMessage); 
@@ -625,64 +716,167 @@
                     emptyDiscardMessage.style.display = 'none';
                     pile.forEach(card => { 
                         const cardElement = document.createElement('div');
-                        cardElement.className = 'discarded-card-item';
+                        cardElement.className = 'modal-card-item';
+
+                        const contentWrapper = document.createElement('div'); 
+                        contentWrapper.className = 'modal-card-item-content';
+
                         const nameElement = document.createElement('h4');
                         nameElement.textContent = card.name;
-                        cardElement.appendChild(nameElement);
+                        contentWrapper.appendChild(nameElement);
+
                         const effectElement = document.createElement('p');
-                        effectElement.innerHTML = card.effect; // Effect is already processed
-                        
+                        effectElement.innerHTML = card.effect;                         
                         const unorderedLists = effectElement.querySelectorAll('ul');
                         unorderedLists.forEach(ul => ul.classList.add('list-disc', 'list-inside', 'pl-5', 'mb-2'));
                         const orderedLists = effectElement.querySelectorAll('ol');
                         orderedLists.forEach(ol => ol.classList.add('list-decimal', 'list-inside', 'pl-5', 'mb-2'));
+                        contentWrapper.appendChild(effectElement);
 
-                        cardElement.appendChild(effectElement);
+                        cardElement.appendChild(contentWrapper);
+
+                        // Add Re-draw button
+                        const redrawButton = document.createElement('button');
+                        redrawButton.innerHTML = `<?xml version="1.0" encoding="utf-8"?><svg fill="#000000" class="w-5 h-5" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" class="cls-1" d="M6,3.6V0L0,6l6,6V8c6-.27,7.53,3.76,7.88,5.77a.27.27,0,0,0,.53,0C17.08,2.86,6,3.6,6,3.6Z"/></svg>`; // Undo arrow icon
+                        redrawButton.className = 'rounded-lg btn-action btn-icon-modal bg-blue-500 hover:bg-blue-600 text-white align-sub';
+                        redrawButton.title = 'Re-draw card';
+                        redrawButton.onclick = () => redrawCardFromDiscard(card, deckKey);
+                        cardElement.appendChild(redrawButton);
+
                         discardModalBody.appendChild(cardElement);
                     });
                 }
                 discardModal.style.display = 'flex';
             };
-            const closeDiscardModal = () => { /* ... (no change) ... */ discardModal.style.display = 'none'; };
-            const resetGame = () => { /* ... (no change) ... */ 
+            const closeDiscardModal = () => { discardModal.style.display = 'none'; };
+
+            // --- Modal Logic: View All Cards ---
+            const openAllCardsModal = (deckKey) => {
+                if (!allDecks[deckKey] || !allDecks[deckKey].list) {
+                    console.error(`Deck data for ${deckKey} is not available for 'View All Cards' modal.`);
+                    allCardsModalTitle.textContent = "Error";
+                    allCardsModalBody.innerHTML = '<p class="text-red-500 text-center">Could not load card list: deck data missing.</p>';
+                    allCardsModal.style.display = 'flex';
+                    return;
+                }
+
+                const deckData = allDecks[deckKey];
+                allCardsModalTitle.textContent = `All Cards in ${deckData.name}`;
+                allCardsModalBody.innerHTML = ''; // Clear previous content
+
+                if (deckData.list.length === 0) {
+                    allCardsModalBody.appendChild(emptyAllCardsMessage);
+                    emptyAllCardsMessage.style.display = 'block';
+                } else {
+                    emptyAllCardsMessage.style.display = 'none';
+                    deckData.list.forEach(card => {
+                        const cardElement = document.createElement('div');
+                        cardElement.className = 'modal-card-item'; // Reusing the style
+
+                        const contentWrapper = document.createElement('div');
+                        contentWrapper.className = 'modal-card-item-content';
+
+                        const nameElement = document.createElement('h4');
+                        nameElement.textContent = card.name;
+                        contentWrapper.appendChild(nameElement);
+
+                        const effectElement = document.createElement('p');
+                        effectElement.innerHTML = card.effect; // Effect text already processed with mana symbols
+                        
+                        // Apply list styling if any ul/ol are present in the effect
+                        const unorderedLists = effectElement.querySelectorAll('ul');
+                        unorderedLists.forEach(ul => ul.classList.add('list-disc', 'list-inside', 'pl-5', 'mb-2'));
+                        const orderedLists = effectElement.querySelectorAll('ol');
+                        orderedLists.forEach(ol => ol.classList.add('list-decimal', 'list-inside', 'pl-5', 'mb-2'));
+                        
+                        contentWrapper.appendChild(effectElement);
+                        cardElement.appendChild(contentWrapper);
+                        allCardsModalBody.appendChild(cardElement);
+                    });
+                }
+                allCardsModal.style.display = 'flex';
+            };
+            const closeAllCardsModal = () => { allCardsModal.style.display = 'none'; };
+
+            const openTest = () => {
+                alert('test opened');
+            }
+
+            const resetGame = () => { 
                 currentlyDrawnCard = null; activeEffects = [];
                 discardPiles = { chaos: [], realm: [], persona: [], whacky: [] };
                 drawnCounts = { chaos: 0, realm: 0, persona: 0, whacky: 0 }; 
                 updateDrawnCardDisplay(); updateActiveEffectsDisplay(); updateDrawnCountsDisplay(); 
                 closeDiscardModal(); 
-                if (diceResultDisplay) diceResultDisplay.textContent = "Roll result will appear here."; // Reset dice result
+                closeAllCardsModal(); 
+                closeDeckListOptionsModal();
+                if (diceResultDisplay) diceResultDisplay.textContent = "Roll result will appear here."; 
+            };
+
+            const openDeckListOptionsModal = () => {
+                deckListOptionsModal.style.display = 'flex';
+                // deckListOptionsModal.textContent = "Error";
+                // deckListOptionsModalBody.innerHTML = '<p class="text-red-500 text-center">Could not something</p>';
+                // deckListOptionsModal.style.display = 'flex';
+                return;                
+            }
+
+            const closeDeckListOptionsModal = () => {
+                deckListOptionsModal.style.display = 'none'; 
             };
 
             // --- Dice Roller Logic ---
             const rollDie = (sides) => {
                 let result = Math.floor(Math.random() * sides) + 1;
-                if(sides === 2 ){
-                    result = result === 1 ? 'Heads' : 'Tails';
-                }
+                if(sides === 2 ) result = result === 1 ? 'Heads' : 'Tails';
                 diceResultDisplay.textContent = `D${sides} rolled: ${result}`;
-                diceResultDisplay.classList.remove('text-gray-400'); // Make result more prominent
+                diceResultDisplay.classList.remove('text-gray-400'); 
                 diceResultDisplay.classList.add('text-green-400'); 
             };
 
-            if(rollD2Button) rollD2Button.addEventListener('click', ()=> rollDie(2));
-            if(rollD3Button) rollD3Button.addEventListener('click', ()=> rollDie(3));
+            if(rollD2Button) rollD2Button.addEventListener('click', () => rollDie(2));
+            if(rollD3Button) rollD3Button.addEventListener('click', () => rollDie(3));
             if(rollD4Button) rollD4Button.addEventListener('click', () => rollDie(4));
             if(rollD6Button) rollD6Button.addEventListener('click', () => rollDie(6));
             if(rollD10Button) rollD10Button.addEventListener('click', () => rollDie(10));
 
-
             // --- Event Listeners (Main) ---
-            decksSection.addEventListener('click', (event) => { /* ... (no change) ... */ 
-                const target = event.target.closest('button[data-deck], button[data-view-discard]'); 
+            decksSection.addEventListener('click', (event) => { 
+                const target = event.target.closest('button[data-deck], button[data-view-discard], button[data-view-all]'); 
                 if (!target) return;
                 if (target.dataset.deck) drawCard(target.dataset.deck);
                 else if (target.dataset.viewDiscard) openDiscardModal(target.dataset.viewDiscard);
+                else if (target.dataset.viewAll){
+                     openAllCardsModal(target.dataset.viewAll); // Listener for new button
+                }
+            });
+            //defaultDeckListOptionsMessage.addEventListener('click', (event) => {
+                deckListOptionButtonsSection.addEventListener('click', (event) => {
+                const target = event.target.closest('button[data-view-all]');
+                if(!target) return;
+                if(target.dataset.viewAll){
+                    closeDeckListOptionsModal();
+                    openAllCardsModal(target.dataset.viewAll); 
+                } 
             });
             moveToEffectButton.addEventListener('click', moveCurrentToEffect);
             discardDrawnCardButton.addEventListener('click', discardCurrentDrawnCard);
+            
+            // Discard Modal Listeners
             closeDiscardModalButton.addEventListener('click', closeDiscardModal);
             discardModal.addEventListener('click', (event) => { if (event.target === discardModal) closeDiscardModal(); });
+            
+            // All Cards Modal Listeners
+            closeAllCardsModalButton.addEventListener('click', closeAllCardsModal);
+            allCardsModal.addEventListener('click', (event) => { if (event.target === allCardsModal) closeAllCardsModal(); });
+
+            // Deck List Modal Listeners
+            closeDeckListOptionsModalButton.addEventListener('click', closeDeckListOptionsModal);
+            deckListOptionsModal.addEventListener('click', (event) => { if (event.target === deckListOptionsModal) closeDeckListOptionsModal(); });
+
             resetButton.addEventListener('click', resetGame);
+            deckListsButton.addEventListener('click', openDeckListOptionsModal);
+            testButton.addEventListener('click',openTest);
 
             // Initial UI setup (only if processing was successful)
             if (processingSuccessful) {
