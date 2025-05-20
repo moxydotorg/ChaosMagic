@@ -48,6 +48,7 @@
     Picture displays when drawn at the top of the play area
     Name displays just below the picture and as a header in the in-effect and discard areas
     Effect displays just below the name in the drawn, in-effect, and discard areas
+    Group is an array of strings that "tags" each effect later to be used in enabling or disabling them as a group.
     
     Effect can contain additional HTML. This is useful for modal spells or lists of things. Unordered lists "<ul>" is common here.
     Effect can also contain symbol tags see: https://scryfall.com/docs/api/colors for a list of symbols. 
@@ -64,22 +65,26 @@ const chaosList =
         name: "Eureka",
         picture: "https://cards.scryfall.io/art_crop/front/5/2/520db5fb-d961-45a3-af74-6f054b8be3ab.jpg?1562858733",
         effect: "Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.",
+        groups: ["free drops"], 
     },
     {
         name: "Air Strike",
         picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Air+Strike&font=lora",
         effect: "Put 3 Eagle tokens into play. Treat these tokens as 2/1 fliers that are considered all colors and have haste. At end of turn, sacrifice all Eagle tokens.",   
+        groups: ["free drops"],
     },
     {
         //verified w/ scryfall 5/2025
         name: "Feldon's Cane",
         picture: "https://cards.scryfall.io/art_crop/front/b/b/bb6af436-bcfd-4d47-a1aa-e84b587a725a.jpg?1562934632",
         effect: "Shuffle your graveyard into your library.",
+        groups: ["shuffle", "recursion", "graveyard", "library"]
     },
     {
         name: "Enchant WorldLand",
         picture: "https://placehold.co/600x400/FF4136/FFFFFF?text=Roll+for+Realm+Enchant&font=lora",
         effect: "Roll in EnchantWorldLand.",
+        groups: ["realm enchantment"],
     },
     {
         name: "Footbottom Feast",
