@@ -2,7 +2,7 @@
 
 //TODO: review the list for Oracle wording changes.
 
-const realmEnchantmentList = [
+export const realmEnchantmentList = [
         {
             name: "Masquerade Cycle",
             picture: "https://placehold.co/150x210/058aFF/FFFFFF?&font=lora&text=Masquerade+Cycle",

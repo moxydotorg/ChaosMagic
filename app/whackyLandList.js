@@ -3,7 +3,7 @@
 // flavor is vestigial and isn't used. It can be removed or we can incorporate it into the design and add it to the other files.
 
 //TODO: review the list for Oracle wording changes.
-const whackyList = [
+export const whackyList = [
     {
         name: 'Time Sprint',
         effect: 'Take 2 extra turns after this one.',

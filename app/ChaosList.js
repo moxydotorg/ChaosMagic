@@ -58,7 +58,7 @@
 //TODO: review the list for Oracle wording changes.
 //TODO: maybe standardize on how much colorless mana makes up for a colored mana and edit all the alt costs to be consistent.
 
-const chaosList = 
+export const chaosList = 
 [
     {
         //verified w/ scryfall 5/2025

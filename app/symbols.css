@@ -1,4 +1,9 @@
 /* see https://scryfall.com/docs/api/colors */
+.card-symbol-E, .card-symbol-P, .card-symbol-PW, .card-symbol-CHAOS, .card-symbol-TK, .card-symbol-H, .card-symbol-L, .card-symbol-D{
+	background-color:#CAC5C0; /* Ensure this is visible or adjust as needed */
+	/* Consider adding padding/margin if symbols.css doesn't handle it well */
+}
+
 .card-symbol {
 	display: inline-block;
 	margin: 1px 1px -1px 1px;

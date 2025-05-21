@@ -4,7 +4,7 @@
 
 //TODO: review the list for Oracle wording changes.
 //TODO: can we change it to display an HTML element?
-const personaList = [
+export const personaList = [
     { //was KGB
         name: 'Josh',
         effect: 'Roll 1d6. For each opponent, lose that much life.<br/>'+
