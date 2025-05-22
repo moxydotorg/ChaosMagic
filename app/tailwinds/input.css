@@ -4,11 +4,23 @@
 @tailwind utilities;
 
 
+@layer base {
+
+}
+
 
 @layer components {
     body{
         overscroll-behavior-y: contain; 
     }
+
+    ul{
+        @apply list-disc list-inside pl-5 mb-2;
+    }
+
+    ol{
+        @apply list-decimal list-inside pl-5 mb-2;
+    } 
 
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #2D3748; border-radius: 10px; }
@@ -47,6 +59,9 @@
     }    
     .effect-item-icon { margin-right: 0.75rem; flex-shrink: 0; width: 1.25rem; height: 1.25rem; }
     .effect-item:hover { background-color: #4A5568; }
+    .effect-item-text {
+        @apply text-sm text-gray-200 flex-grow mr-2;
+    }
     
     .btn-action { 
         @apply text-white;
@@ -138,6 +153,8 @@
         &:active{ transform: scale(0.98); }
     }
     
+
+
 }
 
 
