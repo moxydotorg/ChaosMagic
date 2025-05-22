@@ -10,3 +10,10 @@ When you're instructed to roll on a different list just hit that list button for
 If an effect references a die role, for example 1d6, it'll generate a roll for you and include it in italics. Feel free to use this or roll yourself. We've included some extra die roll options toward the bottom of the page.
 
 If an effect instructs you to look through a list you can find the full list behind the options button.
+
+To build this package, download it. In the tailwinds directory install tailwindcss (you'll need node.js installed already). I've included a simple shell script to assist with this. You can run:
+installTailWind.sh
+in the tailwinds directory
+after that you can run the build.sh script in the app directory and it'll compile the css file and dump everything you need in the output directory.
+
+If you're running this locally you may need "Disable Local File Restrictions" in your browser. In Sarafi in the Developer menu under "Developer Settings"
